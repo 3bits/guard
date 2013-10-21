@@ -1,0 +1,23 @@
+# GuardFile Default 
+
+group :frontend do
+  # Compass
+  guard 'compass', :configuration_file => 'config.rb' do
+    watch(%r{.+\.(scss)})
+  end
+
+  # Livereload
+  guard :livereload do
+    watch(%r{.+\.(css|html|js|png|gif|jpg|erb)})
+  end
+end
+
+group :concat do
+  # Concat javascrit "app.js"
+  guard :concat, type: "js", files: %w(vendor/* main redes), input_dir: "scripts", output: "scripts/app"
+
+  # Juicer minify javascript
+  guard 'process', :name => 'Minify application javascript', :command => 'juicer merge scripts/app.js --force -s' do
+    watch %r{scripts/app\.js}
+  end
+end 
