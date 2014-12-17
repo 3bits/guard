@@ -12,7 +12,7 @@ Guard 3bits
 3.  Após instalar todas as gems do projeto rode o guard com o comando:
 
     ``bundle exec guard``
-  
+
 3.1 Você pode definir a sequência de execução do Guard:
 
     bundle exec guard --group frontend concat linter
