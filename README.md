@@ -1,29 +1,18 @@
 Guard 3bits
 =====
-gem install guard
 
-##Necessário:
-  guard-sass
-  
-  guard-compass
-  
-  guard-process
+1. Usando o terminal entre na pasta do projeto
 
-  guard-concat 0.0.4
-  
-    $ git clone git://github.com/makevoid/guard-concat
-    $ cd guard-concat
-    $ gem build guard-concat.gemspec 
-    $ gem install guard-concat-0.0.4.gem
-  
-  gem juicer
-  
-    $ gem install juicer
-    $ juicer install yui_compressor
-    $ juicer install closure_compiler
-    $ juicer install jslint
+    ``cd /theme-do-projeto``
 
-##Opcional:
-  guard-livereload
+2. Use o [Bundler](http://bundler.io/) para instalar todas as gems:
+
+    ``bundle install``
+
+3. Após instalar todas as gems do projeto rode o guard com o comando:
+
+    ``bundle exec guard``
   
-  guard-shell
+Você pode definir a sequência de execução:
+
+    ``bundle exec guard --group frontend concat linter``
