@@ -15,4 +15,4 @@ Guard 3bits
   
 Você pode definir a sequência de execução:
 
-    ``bundle exec guard --group frontend concat linter``
+    bundle exec guard --group frontend concat linter
