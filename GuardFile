@@ -1,23 +1,43 @@
 # GuardFile Default 
 
 group :frontend do
-  # Compass
-  guard 'compass', :configuration_file => 'config.rb' do
-    watch(%r{.+\.(scss)})
+
+  guard 'shell' do
+   watch %r{.+\.(scss|sass)} do |file|
+   n file[0], "#{file[0]} changed"
+   `compass compile --sourcemap`
+   end
   end
 
-  # Livereload
-  guard :livereload do
-    watch(%r{.+\.(css|html|js|png|gif|jpg|erb)})
+  # Image optimization
+  guard 'shell' do
+   watch %r{^images/.} do |file|
+   n file[0], "#{file[0]} changed"
+   `open #{file[0]} -a ImageOptim`
+   end
   end
+
 end
 
 group :concat do
-  # Concat javascrit "app.js"
-  guard :concat, type: "js", files: %w(vendor/* main redes), input_dir: "scripts", output: "scripts/app"
 
-  # Juicer minify javascript
-  guard 'process', :name => 'Minify application javascript', :command => 'juicer merge scripts/app.js --force -s' do
-    watch %r{scripts/app\.js}
+  guard 'shell' do
+   watch %r{^js/main.js} do |file|
+   n file[0], "#{file[0]} changed"
+   `juicer merge js/app.js js/vendor/* js/main.js  --force -s`
+   end
   end
-end 
+
+end
+
+group :linter do
+
+  guard 'shell' do
+   watch %r{.+\.(scss|sass)} do |file|
+   n file[0], "#{file[0]} changed"
+    `scss-lint sass/ --exclude sass/third-party/*`
+   end
+  end
+
+end
+
